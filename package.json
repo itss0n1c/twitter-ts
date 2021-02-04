@@ -1,11 +1,13 @@
 {
-  "name": "twitter-ts",
+  "name": "@itss0n1c/twitter-ts",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "S0n1c",
   "scripts": {
-    "dev": "ts-node-dev ./tests/index.ts"
+    "dev": "ts-node-dev ./tests/index.ts",
+    "build": "tsc -p ."
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
