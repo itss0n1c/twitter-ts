@@ -1,11 +1,11 @@
 import { config } from 'dotenv';
 import Twitter from 'twitter';
-import { Tweets } from './stores/Tweets';
-import { Users } from './stores/Users';
+import { Tweets, Tweet } from './stores/Tweets';
+import { User, Users } from './stores/Users';
 
 config();
 
-export class TwitterAPI {
+class TwitterAPI {
 	client: Twitter
 
 	tweets: Tweets
@@ -51,3 +51,5 @@ export class TwitterAPI {
 		});
 	}
 }
+
+export { TwitterAPI, User, Tweet, Users, Tweets, Twitter };
