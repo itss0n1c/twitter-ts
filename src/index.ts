@@ -12,12 +12,24 @@ class TwitterAPI {
 	users: Users
 
 	constructor(creds?: {consumer_key: string, consumer_secret: string, access_token_key: string, access_token_secret: string}) {
-		this.client = new Twitter({
-			consumer_key: creds.consumer_key || process.env.TWITTER_CONSUMER_KEY,
-			consumer_secret: creds.consumer_secret || process.env.TWITTER_CONSUMER_SECRET,
-			access_token_key: creds.access_token_key || process.env.TWITTER_ACCESS_TOKEN,
-			access_token_secret: creds.access_token_secret || process.env.TWITTER_ACCESS_TOKEN_SECRET
-		});
+		let cred: {consumer_key: string, consumer_secret: string, access_token_key: string, access_token_secret: string};
+		if (typeof creds === 'undefined') {
+			cred = {
+				consumer_key: process.env.TWITTER_CONSUMER_KEY,
+				consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+				access_token_key: process.env.TWITTER_ACCESS_TOKEN,
+				access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+			};
+		} else {
+			cred = {
+				consumer_key: creds.consumer_key || process.env.TWITTER_CONSUMER_KEY,
+				consumer_secret: creds.consumer_secret || process.env.TWITTER_CONSUMER_SECRET,
+				access_token_key: creds.access_token_key || process.env.TWITTER_ACCESS_TOKEN,
+				access_token_secret: creds.access_token_secret || process.env.TWITTER_ACCESS_TOKEN_SECRET
+			};
+		}
+
+		this.client = new Twitter(cred);
 		this.tweets = new Tweets(this);
 		this.users = new Users(this);
 	}
